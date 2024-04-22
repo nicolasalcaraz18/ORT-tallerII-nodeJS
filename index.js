@@ -202,4 +202,3 @@ const uperCaseMap=pet.map((element) => element.toUpperCase())
 console.log(uperCaseMap)
 
 
-
