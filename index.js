@@ -135,7 +135,7 @@ const data={
 /*
 const jsonCopy=JSON.stringify(data)// es un formato json, supogo que el objeto tambien pasa a ese formato.
 console.log(typeof jsonCopy) // transforma todo el objeto a string
-*/
+
 // vuelvo a transormar el este jsonCopy a objeto
 // reconstruir el objeto
 // copia mas profunda, a juanito no le agrega el bachillerato.
@@ -144,4 +144,62 @@ console.log(typeof jsonCopy)
 jsonCopy.titulos.push("bachillerato")
 console.log(jsonCopy)
 console.log(data)
+*/
+//console.log("-----------ahora con strcture clone")
+
+/*
+    forma de copiar datos conn structured clone
+    al igual la forma json, este tambien mantiene la estrucutra en los objetos.
+
+
+const cloneCopy=structuredClone(data)
+cloneCopy.nombre="Juan"
+cloneCopy.titulos.unshift("jardin") // agrega al pricipio del array
+console.log(cloneCopy)
+console.log(data)
+*/
+/*
+callbacks:funcion que se le pasa por parametro a otra funcion
+*/
+function buenDia(){
+    console.log("buen dia :)")
+}
+
+function buenasNoches(){
+    console.log("buenas noches :))")
+}
+
+function saludar(fn){
+    return fn()
+}
+saludar(buenDia)
+saludar(buenasNoches)
+
+const pet=["perro","gato","loro"]
+/*
+pet.forEach(element =>{
+    console.log("Animal " + element)
+});
+*/
+/*
+pet.forEach((element,index) =>{
+    //console.log("Animal " + element)
+    console.log("devuelve el indice " + index)
+});
+*/
+const newArray=[] // se puede declarar un array vacio
+
+function upper(pet){
+    pet.forEach((element,array) =>{
+        newArray.push(element.toUpperCase());
+    });
+}
+upper(pet)
+//console.log(newArray)
+//values = element
+console.log("En una sola linea")
+const uperCaseMap=pet.map((element) => element.toUpperCase())
+console.log(uperCaseMap)
+
+
 
