@@ -1,41 +1,33 @@
-//const sayHello=require("./Function/sayHello")
-//sayHello()
-/*
-const{sayHello,nom}=require("./Function/sayHello")
-console.log(nom)
-sayHello(nom)
-
-const dataUsuario={
-    nombre:"Juan",
-    edad:44,
+function uno(){
+    console.log("Uno")
 }
 
-//const nombre=dataUsuario.nombre
-//const edad=dataUsuario.edad
-// esto se lo conoce como "desestructuracion", se utiliza mucho para los formularios.
-const {nombre, edad} = dataUsuario
-console.log(nombre)
-console.log(edad)
+function dos(){
+    return new Promise((resolve,reject) => {
+        //resolve("promesa positiva")
+        reject("promesa negativa")
+    })
+}
 
-*/
-// ejercicio 1
-//--------------------------------IMPORTACIONES SIEMPRE ARRIBA DE TODO.
-const maxNumber=require("./Function/maxNumber")
-const sumElements=require("./Function/sumElements")
-const abbrevName=require("./Function/abbrevName")
-const oneProperty=require("./Function/oneProperty")
-const primaryStudents=require("./Function/primaryStudents")
-maxNumber([40,56,32,87,7,21,109])
-//ejercicio 2
-sumElements([45,45,90])
-//ejercicio 3
-abbrevName("Camilo Sesto")
-//ejercicio 4
-oneProperty([{ name:"Kuka", edad:3 }, { name: "Canela", edad:4 }],"name")
-//ejercicio 5
-const estudiantes = [ { nombre: "Juan", edad: 17, curso: "Primero" }, 
-{ nombre: "Ana", edad: 18, curso: "Segundo" }, 
-{ nombre: "Carlos", edad: 16, curso: "Primero" },
-{ nombre: "María", edad: 19, curso: "Tercero" }, ];
+function tres(){
+    console.log("tres")
+}
 
-primaryStudents(estudiantes)
+function cuatro(){
+    return fetch('https://jsonplaceholder.typicode.com/posts/1')
+}
+
+uno()
+
+dos().then(data=>console.log(data)).catch(error=>console.log(error))
+
+// se ejecuta una despues de la otra
+// setTimeout() es una funcion que recibe como primer parametro un callback
+// y como segunado un timeout
+setTimeout(() => {
+    console.log("Me ejecuto tarde (?)")
+},1000) // esto es una funcion asincronica.
+tres()
+// ni idea que hace esto. solo se que con then manejo promesas
+// y con el catch catcheo errores
+cuatro().then((data) => data.json()).then((data) => console.log(data)).catch((error)=>console.log(error))
