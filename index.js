@@ -1,5 +1,4 @@
-import fs, { readFileSync, writeFileSync,readdirSync} from 'node:fs';// recordar importar, tambien recordar pegarse un tiro!!!
-
+import fs, { readFileSync, writeFileSync, readdirSync, mkdirSync} from 'node:fs';// recordar importar
 
 // esta es una funcion arrow
 // este tipo de funcion se almacena en la variable "read", puede recibir parametros
@@ -60,7 +59,6 @@ El callback toma dos parámetros: error
 (si se produce algún error) y data (los nombres de los archivos y subdirectorios en el directorio).
 */
 
-
 const readdirDirectoryV2 = () => {
     fs.readdir("./",(error,data)=>{
         if(error){
@@ -71,4 +69,19 @@ const readdirDirectoryV2 = () => {
     })
 }
 
-readdirDirectoryV2()
+//readdirDirectoryV2()
+
+// creo un directorio con fs.mkdirSync(), este metodo funciono, me creo una carpeta en el escritorio.
+// si la carpeta ya existe, no la crea
+
+const createdDirectory = () => {
+    try{
+        const newDirectory = fs.mkdirSync("C:\\Users\\Nicolas\\Desktop\\newPage")
+        //console.log(newDirectory) undefined, lo mismo si lo parseo a JSON.stringity
+    } catch (error){
+        console.log("no se pudo crear el directorio.")
+    }
+   
+}
+
+//createdDirectory()
