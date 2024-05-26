@@ -22,6 +22,6 @@ const connection = async() =>{
     }
 }
 
-const db = connection() // esta es la funcion de arriba 
+const db = await connection() // esta es la funcion de arriba 
 
 export default db;

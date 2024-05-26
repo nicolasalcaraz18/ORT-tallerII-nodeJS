@@ -1,6 +1,5 @@
 import express from "express"
 import routes from "./routes/routes.js";
-//import { myLogger } from "./middlewares/myLogger.js"; //desestructurado
 import morgan from "morgan"
 
 const app = express();
@@ -13,8 +12,7 @@ app.use(express.urlencoded({extended:true}))// (1er) este middleware es importan
 // este middleware se utiliza para manejar JSON
 app.use(express.json()) // (2do) middleware importante 
 
-//app.use(myLogger)// de esta menera esta a nivel de aplicacion "app"
-//app.use(myLogger,routes) // a nivel de la aplicacion y de routes
+
 app.use(morgan("tiny"))
 
 app.use(routes)

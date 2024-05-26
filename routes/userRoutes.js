@@ -1,34 +1,27 @@
 import {Router}from "express" // desestructuracion.
-//import { myLogger } from "../middlewares/myLogger.js"
-import db from "../connection/connecction.js"
+import UserControllers from "../Controllers/UserControllers.js"
 
 const userRoutes = Router()
 
-//userRoutes.use(myLogger) // tambien se puede aplicar aca.
+const userControllers = new UserControllers()
+
 
 // CRUD (CREATE, READ, UPDATE, DELETE)
 // con el get se hace un read
-userRoutes.get("/",(req,res)=>{
-    res.send("get all users")
-})
+userRoutes.get("/",userControllers.getAllUser) // esto ahora es un callback
 
 userRoutes.get("/:id",(req,res,next)=>{
-    console.log(req.query)
-    const {name,age}= req.query//desestructuracion
-    const {id} = req.params// pasar informacion atraves de parametros.
-    res.send(`get user by id:${id}`)
+ 
 })
 
 // crear un usuario en particular
 userRoutes.post("/",(req,res)=>{
-    const {name, password} = req.body;
-    console.log("manejando JSON " + name + " " + password)
-    res.send(`create user name:${name} and password ${password}`)
+
 })
 
 // actualizar el usuario via ID
 userRoutes.put("/:id",(req,res)=>{
-    res.send("update user by id")
+    
 })
 
 // borrar un usario via ID
