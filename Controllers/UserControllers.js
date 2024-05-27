@@ -1,4 +1,4 @@
-import db from "../connection/connecction.js"
+import User from "../Models/User.js"
 class UserControllers{
 
 async getAllUser (req,res) {
@@ -26,10 +26,8 @@ async getById(req,res){
 async createUser(req,res){
     try {
         const {name,password,mail} = req.body;// forma de filtrar
-        const query = "INSERT INTO user (name, password,mail) VALUES(?,?,?)";
-        const [result] = await db.query(query,[name,password,mail])
-        res.status(200).send({success:true,message:result});
-
+        const result = await User.create({name,password,mail})// en este punto se guarda en la base de datos
+        res.status(200).send({success:true,message:"usuario creado con exito"});
     } catch (error) {
         res.status(400).send({success:false,message:error})
     }
