@@ -9,9 +9,9 @@ app.use(express.urlencoded({extended:true}))// (1er) este middleware es importan
 // es el primer middleware que debe ser ejecutado ya que recibe todas las peticiones
 // y va a estar accediedno al body, y lo devolvera en forma de objeto.
 
+
 // este middleware se utiliza para manejar JSON
 app.use(express.json()) // (2do) middleware importante 
-
 
 app.use(morgan("tiny"))
 

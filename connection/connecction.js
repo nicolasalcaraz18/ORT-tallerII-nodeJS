@@ -9,13 +9,8 @@ const connection = async() =>{
             database: 'talleriipruebabd',
             port:'3306' //este puerto es el que viene por defecto
         })
-        const itsOk= await conn.connect()
-        if(itsOk){
-            console.log("conexion correcta")
-            return conn
-        } else {
-            console.log("no")
-        }
+
+        return conn
         
     }catch(error){
         console.log(error)
@@ -23,5 +18,4 @@ const connection = async() =>{
 }
 
 const db = await connection() // esta es la funcion de arriba 
-
 export default db;

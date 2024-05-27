@@ -1,33 +1,24 @@
-import {Router}from "express" // desestructuracion.
+import {Router}from "express" // desestructuracion. 
 import UserControllers from "../Controllers/UserControllers.js"
 
 const userRoutes = Router()
 
 const userControllers = new UserControllers()
 
-
 // CRUD (CREATE, READ, UPDATE, DELETE)
 // con el get se hace un read
 userRoutes.get("/",userControllers.getAllUser) // esto ahora es un callback
 
-userRoutes.get("/:id",(req,res,next)=>{
- 
-})
+userRoutes.get("/:id",userControllers.getById)
 
 // crear un usuario en particular
-userRoutes.post("/",(req,res)=>{
-
-})
+userRoutes.post("/",userControllers.createUser)
 
 // actualizar el usuario via ID
-userRoutes.put("/:id",(req,res)=>{
-    
-})
+userRoutes.put("/:id",userControllers.updateUser)
 
 // borrar un usario via ID
-userRoutes.delete("/:id",(req,res)=>{
-    res.send("delete user by id")
-})
+userRoutes.delete("/:id",userControllers.deleteUser)
 
 export default userRoutes;
 /*
