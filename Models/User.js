@@ -22,7 +22,8 @@ User.init({
 },{
     sequelize:connection,
     modelName:"User"
-    //2do objeto: conexion y model name, nombre de la tabla
+    //2do objeto: conexion y model name, nombre de la tabla, si bien lo puse en singular "user", este 
+    // me lo creara en plural "Users" en la tabla 
 })
 
 export default User;

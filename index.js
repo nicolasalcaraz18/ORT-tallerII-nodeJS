@@ -17,7 +17,6 @@ app.use(morgan("tiny"))
 
 app.use(routes)
 
-
 app.use((req,res,next)=>{
     res.status(404).send({success:false,message:"not found"})
 })
