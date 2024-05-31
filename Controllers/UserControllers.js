@@ -1,15 +1,15 @@
-import User from "../Models/User.js"
+import User from "../Models/User.js"; // recordar importar bien 
 class UserControllers{
 
 async getAllUser (req,res) {
     try {
-        const users = await User.findAll()
+        const users = await User.findAll({attributes:["id","name","password","mail"]})
         res.status(200).send({success:true,users}) 
     } catch (error) {
         res.status(400).send({success:false,message:error})
     }
 }
-// funciona
+// funciona es mejor el findOne creo.
 async getById(req,res){
     try {
         const {id}= req.params;
@@ -36,8 +36,8 @@ async updateUser(req,res){
     try {
         const {id} = req.params;
         const {name,password,mail} = req.body;// forma de filtrar
-        const query = "UPDATE user SET name=?,password=?,mail=? WHERE id=?";
-        const [result] = await db.query(query,[name,password,mail,id])
+        
+        const result = await User.update({name,password,mail},{where:{id}})
         res.status(200).send({success:true,message:"usuario modificado correctamente"});
     } catch (error) {
         res.status(400).send({success:false,message:error})
@@ -47,7 +47,9 @@ async updateUser(req,res){
 async deleteUser(req,res){
     try {
         const {id}=req.params;
-        await User.delete(id) 
+        //await User.delete(id) 
+        await User.destroy({where:{id} // forma correcta
+        }) 
         res.status(200).send({success:true,message:"Usuario borrado"}) 
     } catch (error) {
         res.status(400).send({success:false,message:error})

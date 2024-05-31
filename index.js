@@ -2,6 +2,8 @@ import express from "express"
 import routes from "./routes/routes.js";
 import morgan from "morgan"
 import connection from "./connection/connecction.js";
+import { SERVER_PORT } from "./config/config.js";
+
 
 const app = express();
 
@@ -22,9 +24,10 @@ app.use((req,res,next)=>{
 })
 
 // este metodo levanta los modelos
-await connection.sync({force:true}); // esto para produccion nunca
-
-app.listen(8080,()=>{
+await connection.sync({alter:true}); // esto para produccion nunca
+// force: crea la tabla y borra la anterioir
+// alter: no crea una nueva, sino que interactua con la misma
+app.listen(SERVER_PORT,()=>{
     console.log("server_ok_express:)")
 })
 

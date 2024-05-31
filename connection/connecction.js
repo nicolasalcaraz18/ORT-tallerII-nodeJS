@@ -1,9 +1,10 @@
 import { Sequelize } from "sequelize";
+import { DB_NAME,DB_USER,DB_PASSWORD,DB_HOST,DB_DIALECT,DB_PORT } from "../config/config.js";
 // conectado con sequelize, aca se crea la conexion con la base de datos.
-const connection = new Sequelize("talleriipruebabd","root","",{
-    host:"localhost",
-    dialect:"mysql",
-    port:3306
+const connection = new Sequelize(DB_NAME,DB_USER,DB_PASSWORD,{
+    host:DB_HOST,
+    dialect:DB_DIALECT,
+    port:DB_PORT
 })
 
 try {
