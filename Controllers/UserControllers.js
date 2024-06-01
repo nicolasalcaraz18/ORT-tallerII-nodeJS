@@ -1,9 +1,11 @@
-import User from "../Models/User.js"; // recordar importar bien 
+import {User, Role} from "../Models/models.js"; // recordar importar bien 
 class UserControllers{
 
 async getAllUser (req,res) {
     try {
-        const users = await User.findAll({attributes:["id","name","password","mail"]})
+        const users = await User.findAll({attributes:["id","name","password","mail"],
+            include:[{model:Role,attributes:["name"]}]
+        })
         res.status(200).send({success:true,users}) 
     } catch (error) {
         res.status(400).send({success:false,message:error})
@@ -23,8 +25,8 @@ async getById(req,res){
 //POST
 async createUser(req,res){
     try {
-        const {name,password,mail} = req.body;// forma de filtrar
-        await User.create({name,password,mail})// en este punto se guarda en la base de datos
+        const {name,password,mail, RoleId} = req.body;// forma de filtrar
+        await User.create({name,password,mail,RoleId})// en este punto se guarda en la base de datos
         res.status(200).send({success:true,message:"usuario creado con exito"});
     } catch (error) {
         res.status(400).send({success:false,message:error})
@@ -35,9 +37,9 @@ async createUser(req,res){
 async updateUser(req,res){
     try {
         const {id} = req.params;
-        const {name,password,mail} = req.body;// forma de filtrar
+        const {name,password,mail,RoleId} = req.body;// forma de filtrar
         
-        const result = await User.update({name,password,mail},{where:{id}})
+        await User.update({name,password,mail,RoleId},{where:{id}})
         res.status(200).send({success:true,message:"usuario modificado correctamente"});
     } catch (error) {
         res.status(400).send({success:false,message:error})
