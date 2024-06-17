@@ -3,7 +3,8 @@ import routes from "./routes/routes.js";
 import morgan from "morgan"
 import connection from "./connection/connecction.js";
 import { SERVER_PORT } from "./config/config.js";
-
+import cookieParser from "cookie-parser";
+//import { roleSeed } from "./seed/roleSeed.js";
 
 const app = express();
 
@@ -17,6 +18,8 @@ app.use(express.json())
 
 app.use(morgan("tiny"))
 
+app.use(cookieParser())
+
 app.use(routes)
 
 app.use((req,res,next)=>{
@@ -24,9 +27,14 @@ app.use((req,res,next)=>{
 })
 
 // este metodo levanta los modelos
-await connection.sync({alter:true}); // esto para produccion nunca
+await connection.sync({force:true}); // esto para produccion nunca
 // force: crea la tabla y borra la anterioir
 // alter: no crea una nueva, sino que interactua con la misma
+
+
+//await roleSeed()
+
+
 app.listen(SERVER_PORT,()=>{
     console.log("server_ok_express:)")
 })

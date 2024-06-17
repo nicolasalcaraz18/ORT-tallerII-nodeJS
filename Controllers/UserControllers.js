@@ -1,4 +1,5 @@
 import {User, Role} from "../Models/models.js"; // recordar importar bien 
+import {genToken, verifyToken} from "../utills/token.js"
 class UserControllers{
 
 async getAllUser (req,res) {
@@ -29,7 +30,7 @@ async createUser(req,res){
         await User.create({name,password,mail,RoleId})// en este punto se guarda en la base de datos
         res.status(200).send({success:true,message:"usuario creado con exito"});
     } catch (error) {
-        res.status(400).send({success:false,message:error})
+        res.status(400).send({success:false,message:error.message})
     }
 }
 
@@ -57,6 +58,41 @@ async deleteUser(req,res){
         res.status(400).send({success:false,message:error})
     }
 }
+
+login = async (req, res) =>{
+    try {
+        const {mail, password} = req.body
+        const data = await User.findOne({where:{mail}})
+        if(!data){
+            throw new Error("mail incorrecto")
+        }
+        const comparePass = await data.comparePass(password)
+        if(comparePass){
+            const payload = {
+                id:data.id,
+                name: data.name
+            }
+            const token = genToken(payload)
+            console.log("tu token es: " + token)
+            res.cookie("token",token)
+            res.status(200).send({success:true,message:"Loggin Correct"}) 
+        } else {
+            throw new Error("contraseña incorrecta")
+        }
+    } catch (error) {
+        res.status(400).send({success:false,message:error.message})
+    }
+   
+    }
+// no entiendo pq no usa el await......
+    me = async(req,res) =>{
+        try {
+            const {user} = req
+            res.status(200).send({success:true,message:user}) 
+        } catch (error) {
+            res.status(400).send({success:false,message:error.message})
+        }
+    }
 
 }
 export default UserControllers;
